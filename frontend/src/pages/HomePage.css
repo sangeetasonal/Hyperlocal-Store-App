@@ -1,0 +1,145 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden; 
+  font-family: 'Arial', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.home-container {
+  height: 100vh;
+  overflow-y: auto; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+  background-image: url('../assets/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  color: white;
+  position: relative;
+}
+
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: -1; 
+}
+
+.home-container::-webkit-scrollbar {
+  display: none; 
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 15px 30px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.store-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+  text-align: left;
+}
+
+.store-list li {
+  background: rgba(255, 255, 255, 0.85);
+  color: #333;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.4s, box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.store-list li:hover {
+  transform: translateY(-5px);
+  background: #ffcc70;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); 
+}
+
+.store-list li span {
+  font-size: 1.1rem;
+  color: #777;
+}
+
+.store-list li strong {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.store-list li .arrow {
+  font-size: 1.5rem;
+  color: #ff6f00;
+  transition: transform 0.3s;
+}
+
+.store-list li:hover .arrow {
+  transform: translateX(10px); 
+}
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+    padding: 12px 20px;
+  }
+
+  .store-list li {
+    padding: 15px 18px;
+    font-size: 1.1rem;
+  }
+
+  .store-list li strong {
+    font-size: 1.2rem;
+  }
+
+  .store-list li .arrow {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.6rem;
+    padding: 10px 15px;
+  }
+
+  .store-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1rem;
+    padding: 14px 16px;
+  }
+
+  .store-list li .arrow {
+    align-self: flex-end;
+    margin-top: 8px;
+  }
+}
