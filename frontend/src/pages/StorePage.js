@@ -9,7 +9,7 @@ const StorePage = ({ cart, setCart }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/${storeName}`)
+    fetch(`https://hyperlocal-store-app-9te6.onrender.com/api/products/${storeName}`)
       .then(res => res.json())
       .then(data => setProducts(data));
 

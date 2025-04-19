@@ -7,7 +7,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/stores')
+    fetch('https://hyperlocal-store-app-9te6.onrender.com/api/stores')
       .then(res => res.json())
       .then(data => setStores(data));
   }, []);
