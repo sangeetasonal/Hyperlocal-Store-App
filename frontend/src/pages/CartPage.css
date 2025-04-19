@@ -106,3 +106,26 @@ h2 {
   color: #888;
   text-align: center;
 }
+
+.quantity-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.quantity-buttons button {
+  padding: 6px 10px;
+  font-size: 1rem;
+  background-color: #ff9800;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.quantity-buttons button:hover {
+  background-color: #fb8c00;
+}
+

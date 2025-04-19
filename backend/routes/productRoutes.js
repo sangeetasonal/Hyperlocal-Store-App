@@ -1,11 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const products = require('../sample-data/products.json');
+const Product = require('../models/Product'); // Import Product model
 
-router.get('/:storeName', (req, res) => {
+// Route to fetch products by store name
+router.get('/:storeName', async (req, res) => {
   const { storeName } = req.params;
-  const filtered = products.filter(p => p.storeName === storeName);
-  res.json(filtered);
+
+  try {
+    // Fetch products from the database by storeName
+    const products = await Product.find({ storeName });
+    res.json(products); // Send the products as response
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
 module.exports = router;

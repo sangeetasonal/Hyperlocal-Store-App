@@ -6,13 +6,40 @@ const CartPage = ({ cart, setCart }) => {
   const [name, setName] = useState('');
   const navigate = useNavigate();
 
-  // Load cart data from sessionStorage when the component mounts
   useEffect(() => {
     const savedCart = JSON.parse(sessionStorage.getItem('cart'));
     if (savedCart) {
       setCart(savedCart);
     }
   }, [setCart]);
+
+  const updateCartStorage = (updatedCart) => {
+    setCart(updatedCart);
+    sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+  const increaseQuantity = (productName) => {
+    const updatedCart = cart.map(item =>
+      item.name === productName ? { ...item, quantity: item.quantity + 1 } : item
+    );
+    updateCartStorage(updatedCart);
+  };
+
+  const decreaseQuantity = (productName) => {
+    const updatedCart = cart
+      .map(item =>
+        item.name === productName
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+      .filter(item => item.quantity > 0); // Remove item if quantity is 0
+    updateCartStorage(updatedCart);
+  };
+
+  const removeFromCart = (productName) => {
+    const updatedCart = cart.filter(item => item.name !== productName);
+    updateCartStorage(updatedCart);
+  };
 
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -22,14 +49,8 @@ const CartPage = ({ cart, setCart }) => {
       return;
     }
     navigate('/order-confirmation', { state: { name } });
-    setCart([]); // Clear the cart
-    sessionStorage.removeItem('cart'); // Remove cart from sessionStorage
-  };
-
-  const removeFromCart = (productName) => {
-    const updatedCart = cart.filter(item => item.name !== productName);
-    setCart(updatedCart);
-    sessionStorage.setItem('cart', JSON.stringify(updatedCart)); 
+    setCart([]);
+    sessionStorage.removeItem('cart');
   };
 
   return (
@@ -46,6 +67,11 @@ const CartPage = ({ cart, setCart }) => {
                   <div>
                     <strong>{item.name}</strong>
                     <p>₹{item.price} × {item.quantity}</p>
+                    <div className="quantity-buttons">
+                      <button onClick={() => decreaseQuantity(item.name)}>-</button>
+                      <span>{item.quantity}</span>
+                      <button onClick={() => increaseQuantity(item.name)}>+</button>
+                    </div>
                   </div>
                   <button onClick={() => removeFromCart(item.name)}>✖</button>
                 </li>
